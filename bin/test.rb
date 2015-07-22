@@ -1,3 +1,6 @@
-Dir['/lib/*.rb'].each do |file|
-  p file
+
+class DumbClass
+  def print_dirname
+    p File.dirname(__FILE__)
+  end
 end

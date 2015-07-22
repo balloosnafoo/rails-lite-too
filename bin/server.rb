@@ -15,7 +15,7 @@ server = WEBrick::HTTPServer.new(:Port => 3000)
 
 router = Router.new
 router.draw do
-  get Regexp.new("^/cats$"), CatsController, :index
+  get Regexp.new("^/cats\/*/"), CatsController, :index
 end
 
 server.mount_proc('/') do |req, res|

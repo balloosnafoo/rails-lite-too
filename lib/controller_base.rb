@@ -2,6 +2,7 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'erb'
 require_relative 'session'
+require_relative 'params'
 
 class ControllerBase
   attr_reader :req, :res, :params
@@ -45,11 +46,17 @@ class ControllerBase
   end
 
   def render(template_name)
-    controller_name = self.class.to_s.underscore
+    controller_name = extract_controller_name
+    # debugger
     html = ERB.new(
-      File.read("views/#{controller_name}/#{template_name}.html.erb")
+      File.read("app/views/#{controller_name}/#{template_name}.html.erb")
     ).result(binding)
     render_content(html, "text/html")
+  end
+
+  def extract_controller_name
+    full_name = self.class.to_s.underscore
+    /(?<class_name>\w+)_controller/.match(full_name)["class_name"]
   end
 
   def session

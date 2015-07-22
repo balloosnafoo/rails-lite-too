@@ -1,4 +1,5 @@
 require_relative 'route'
+require 'byebug'
 
 class Router
   attr_reader :routes
