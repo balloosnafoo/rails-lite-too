@@ -1,22 +1,24 @@
 require 'webrick'
 require_relative '../lib/router'
 require_relative '../lib/controller_base'
+require_relative 'resource_routes'
 
 require 'byebug'
 
+# Import all controllers
 Dir['app/controllers/*.rb'].each do |file|
   require_relative "../#{file}"
 end
-# require_relative 'app/controllers/'
 
-# Dir['/app/models/*.rb'].each {|file| require file }
+# Import all models (not sure if necessary)
+Dir['app/models/*.rb'].each do |file|
+  require_relative "../#{file}"
+end
 
 server = WEBrick::HTTPServer.new(:Port => 3000)
 
 router = Router.new
-router.draw do
-  get Regexp.new("^/cats\/*/"), CatsController, :index
-end
+draw_default_routes(router, CatsController)
 
 server.mount_proc('/') do |req, res|
   route = router.run(req, res)

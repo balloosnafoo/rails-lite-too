@@ -35,6 +35,7 @@ class Router
   # either throw 404 or call run on a matched route
   def run(req, res)
     matching_route = match(req)
+    # debugger
     if matching_route
       matching_route.run(req, res)
     else
