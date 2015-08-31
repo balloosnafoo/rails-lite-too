@@ -1,3 +1,6 @@
+require_relative 'searchable'
+require_relative 'associatable'
+
 class SQLObject
   extend Searchable
   extend Associatable

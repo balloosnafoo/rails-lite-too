@@ -47,10 +47,12 @@ class ControllerBase
 
   def render(template_name)
     controller_name = extract_controller_name
-    # debugger
-    html = ERB.new(
-      File.read("app/views/#{controller_name}/#{template_name}.html.erb")
-    ).result(binding)
+    begin
+      view = File.read("app/views/#{controller_name}/#{template_name}.html.erb")
+    rescue
+      raise "Template '#{template_name}' not found"
+    end
+    html = ERB.new(view).result(binding)
     render_content(html, "text/html")
   end
 

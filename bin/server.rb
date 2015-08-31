@@ -1,6 +1,6 @@
 require 'webrick'
-require_relative '../lib/router'
-require_relative '../lib/controller_base'
+require_relative '../src/controller_base/router'
+require_relative '../src/controller_base/controller_base'
 require_relative 'routes'
 
 require 'byebug'
