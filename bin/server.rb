@@ -15,7 +15,7 @@ end
 #   require_relative "../#{file}"
 # end
 
-server = WEBrick::HTTPServer.new(:Port => 3000)
+server = WEBrick::HTTPServer.new(:Port => 3000) # change for production to 8000
 
 router = Router.new
 draw_resources_routes(router)
